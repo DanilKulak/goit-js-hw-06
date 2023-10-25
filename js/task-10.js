@@ -11,23 +11,20 @@ createButton.addEventListener("click", createBoxes);
 destroyButton.addEventListener("click", destroyBoxes);
 
 // Функція для створення колекції елементів
-function createBoxes() {
-  const amount = inputElement.value;
-  const initialSize = 30;
-  const stepSize = 10;
+function createBoxes(amount) {
+  amount = Number(inputElement.value);
+  if (!amount) {
+    alert("Будь-ласка введіть число.");
+    return;
+  }
+  let initialSize = 30;
+  let box = "";
 
   for (let i = 0; i < amount; i++) {
-    const box = document.createElement("div");
-    const size = initialSize + i * stepSize;
-    const backgroundColor = getRandomHexColor();
-
-    box.style.width = `${size}px`;
-    box.style.height = `${size}px`;
-    box.style.backgroundColor = backgroundColor;
-
-    boxesContainer.appendChild(box);
-  }
-}
+    box += `<div style="background-color: ${getRandomHexColor()}; width: ${initialSize}px; height: ${initialSize}px;"></div>`
+    initialSize += 10;
+  } boxesContainer.innerHTML = box;
+} 
 
 // Функція для очищення колекції елементів
 function destroyBoxes() {
